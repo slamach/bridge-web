@@ -1,7 +1,7 @@
-# Project Name
+# Bridge Web (Frontend)
 
 ## About the Project
-Project description
+Frontend part of the web messenger Bridge.
 
 ## Installation and Usage
 ```
