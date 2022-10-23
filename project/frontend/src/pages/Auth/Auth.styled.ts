@@ -9,9 +9,10 @@ export const AuthContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 440px;
 
   & > img {
-    margin-bottom: 40px;
+    margin-bottom: auto;
   }
 `;
 

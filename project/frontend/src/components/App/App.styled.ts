@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, DefaultTheme } from 'styled-components';
 import InterRegular from '../../assets/fonts/Inter-Regular.woff2';
 import InterMedium from '../../assets/fonts/Inter-Medium.woff2';
 import InterSemiBold from '../../assets/fonts/Inter-SemiBold.woff2';
@@ -9,14 +9,13 @@ const breakpoints = {
   small: 360,
 };
 
-export const theme = {
+export const theme: DefaultTheme = {
   breakpoints,
   media: {
     largeOnly: `screen and (min-width: ${breakpoints.large}px)`,
     medium: `screen and (max-width: ${breakpoints.large - 1}px)`,
     small: `screen and (max-width: ${breakpoints.medium - 1}px)`,
   },
-  fonts: {},
   colors: {
     background: '#000000',
     primary: '#ffffff',
@@ -28,7 +27,6 @@ export const theme = {
     elementsBackgroundHovered: '#2C2C2C',
     elementsBackgroundClicked: '#2A2A2A',
   },
-  misc: {},
 };
 
 export const GlobalStyle = createGlobalStyle`
@@ -69,7 +67,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     min-width: ${theme.breakpoints.small}px;
-    min-height: 100%;
+    height: 100%;
     margin: 0;
     overflow-x: hidden;
     scroll-behavior: smooth;

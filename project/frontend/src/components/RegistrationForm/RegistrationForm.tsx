@@ -7,7 +7,7 @@ import InputGroup from '../InputGroup/InputGroup';
 
 const RegistrationForm = () => {
   return (
-    <FormContainer style={{ marginBottom: 49 }}>
+    <FormContainer>
       <FormTitle>Create New Account</FormTitle>
       <InputGroup>
         <Input
