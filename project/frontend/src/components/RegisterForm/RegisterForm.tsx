@@ -1,50 +1,53 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   FormContainer,
   FormError,
   FormTitle,
 } from '../../pages/Auth/Auth.styled';
-import { useLoginMutation } from '../../state/api/authAPI';
-import { setCredentials } from '../../state/slices/authSlice';
+import { useRegisterMutation } from '../../state/api/authAPI';
 import Button from '../Button/Button';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import Input from '../Input/Input';
 import InputGroup from '../InputGroup/InputGroup';
+import { setCredentials } from '../../state/slices/authSlice';
 import { handleAuthError } from '../../utils/errorHandling';
-import { useState } from 'react';
 
-interface LoginFormData {
+interface RegisterFormData {
+  name: string;
   username: string;
   password: string;
 }
 
 const loginValidationSchema = yup.object().shape({
+  name: yup.string().label('Display name').required(),
   username: yup.string().label('Username').required().min(4),
   password: yup.string().label('Password').required().min(8),
 });
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [serverError, setServerError] = useState<string>('');
 
   const dispatch = useDispatch();
-  const [login, loginResult] = useLoginMutation();
+  const [registerUser, registerResult] = useRegisterMutation();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({
+  } = useForm<RegisterFormData>({
     resolver: yupResolver(loginValidationSchema),
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
+  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
     try {
-      const result = await login({
+      const result = await registerUser({
+        name: data.name,
         username: data.username,
         password: data.password,
       }).unwrap();
@@ -62,8 +65,25 @@ const LoginForm = () => {
 
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
-      <FormTitle>Log Into an Existing Account</FormTitle>
+      <FormTitle>Create New Account</FormTitle>
       <InputGroup>
+        <Input
+          id="login-name"
+          type="text"
+          label="Display Name"
+          autoComplete="name"
+          autoCapitalize="on"
+          spellCheck="false"
+          placeholder="Display Name"
+          autoFocus
+          {...register('name', {
+            onChange: () => {
+              if (serverError) {
+                setServerError('');
+              }
+            },
+          })}
+        />
         <Input
           id="login-username"
           type="text"
@@ -72,7 +92,6 @@ const LoginForm = () => {
           autoCapitalize="off"
           spellCheck="false"
           placeholder="Username"
-          autoFocus
           {...register('username', {
             onChange: () => {
               if (serverError) {
@@ -99,18 +118,21 @@ const LoginForm = () => {
         />
       </InputGroup>
       <FormError>
-        {errors.username?.message || errors.password?.message || serverError}
+        {errors.name?.message ||
+          errors.username?.message ||
+          errors.password?.message ||
+          serverError}
       </FormError>
       <ButtonGroup>
-        <Button type="submit" highlight disabled={loginResult.isLoading}>
-          Log In
+        <Button type="submit" highlight disabled={registerResult.isLoading}>
+          Create Account
         </Button>
-        <Button as={Link} to="/auth/register">
-          Create New Account
+        <Button as={Link} to="/auth/login">
+          Log Into an Existing Account
         </Button>
       </ButtonGroup>
     </FormContainer>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

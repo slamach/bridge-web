@@ -9,11 +9,17 @@ export const AuthContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 440px;
+  height: 455px;
 
   & > img {
     margin-bottom: auto;
   }
+`;
+
+export const FormError = styled.p`
+  margin: 15px 0;
+  font-size: 15px;
+  text-align: center;
 `;
 
 export const FormTitle = styled.h2`
@@ -22,7 +28,7 @@ export const FormTitle = styled.h2`
   text-align: center;
 `;
 
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   width: 344px;
 
   ${FormTitle} {
@@ -30,6 +36,6 @@ export const FormContainer = styled.div`
   }
 
   ${InputGroupList} {
-    margin-bottom: 16px;
+    margin-bottom: 15px;
   }
 `;

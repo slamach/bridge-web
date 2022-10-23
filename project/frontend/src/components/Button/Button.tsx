@@ -18,16 +18,16 @@ const Button = styled.button<ButtonProps>`
   border: none;
   border-radius: 14px;
   cursor: pointer;
-  transition: background-color 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: ${({ highlight, theme }) =>
       highlight
         ? theme.colors.highlightHovered
         : theme.colors.elementsBackgroundHovered};
   }
 
-  &:active {
+  &:active:not(:disabled) {
     background-color: ${({ highlight, theme }) =>
       highlight
         ? theme.colors.highlightClicked
@@ -36,6 +36,11 @@ const Button = styled.button<ButtonProps>`
 
   &:focus {
     outline: 1px solid ${({ theme }) => theme.colors.primary};
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: default;
   }
 `;
 
