@@ -6,6 +6,7 @@ import LoginForm from '../LoginForm/LoginForm';
 import RegisterForm from '../RegisterForm/RegisterForm';
 import PrivateOutlet from '../PrivateOutlet/PrivateOutlet';
 import Home from '../../pages/Home/Home';
+import EmptyChat from '../../pages/EmptyChat/EmptyChat';
 
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
         </Route>
         <Route element={<PrivateOutlet />}>
           <Route path="/" element={<Home />}>
-            <Route index element={<p>Select a chat</p>} />
+            <Route index element={<EmptyChat />} />
             <Route path=":chatId" element={<p>Some chat</p>} />
           </Route>
         </Route>
