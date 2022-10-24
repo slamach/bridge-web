@@ -15,12 +15,15 @@ export interface AuthRegisterDTO {
   password: string;
 }
 
-export interface AuthResponse {
-  payload: {
+export interface PayloadResponse<T> {
+  payload: T;
+}
+
+export interface AuthResponse
+  extends PayloadResponse<{
     user: User;
     token: string;
-  };
-}
+  }> {}
 
 export interface Message {
   id: string;

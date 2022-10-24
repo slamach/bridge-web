@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useAppDispatch } from '../../hooks/stateHooks';
 import { useAuth } from '../../hooks/useAuth';
+import { useGetChatsQuery } from '../../state/api/chatsAPI';
 import { clearPersistedCredentials } from '../../state/slices/authSlice';
 import Avatar from '../Avatar/Avatar';
 import Button from '../Button/Button';
@@ -14,82 +15,12 @@ import {
 
 const MAX_NAME_CHARACTERS = 20;
 
-const chatsMock = [
-  {
-    chatId: '1',
-    name: 'Dmitry Sviridov',
-    lastMessage: 'send nudes',
-    time: '2022-10-23T23:55:00.000',
-    sentByUser: false,
-  },
-  {
-    chatId: '2',
-    name: 'Dmitry Sviridov',
-    lastMessage: 'send nudes',
-    time: '2022-10-23T23:55:00.000',
-    sentByUser: false,
-  },
-  {
-    chatId: '3',
-    name: 'Dmitry Sviridov',
-    lastMessage: 'send nudes',
-    time: '2022-10-23T23:55:00.000',
-    sentByUser: false,
-  },
-  {
-    chatId: '4',
-    name: 'Dmitry Sviridov',
-    lastMessage: 'send nudes',
-    time: '2022-10-23T23:55:00.000',
-    sentByUser: false,
-  },
-  {
-    chatId: '5',
-    name: 'Dmitry Sviridov',
-    lastMessage: 'send nudes',
-    time: '2022-10-23T23:55:00.000',
-    sentByUser: false,
-  },
-  {
-    chatId: '6',
-    name: 'Dmitry Sviridov',
-    lastMessage: 'send nudes',
-    time: '2022-10-23T23:55:00.000',
-    sentByUser: false,
-  },
-  {
-    chatId: '7',
-    name: 'Dmitry Sviridov',
-    lastMessage: 'send nudes',
-    time: '2022-10-23T23:55:00.000',
-    sentByUser: false,
-  },
-  {
-    chatId: '8',
-    name: 'Dmitry Sviridov',
-    lastMessage: 'send nudes',
-    time: '2022-10-23T23:55:00.000',
-    sentByUser: false,
-  },
-  {
-    chatId: '9',
-    name: 'Dmitry Sviridov',
-    lastMessage: 'send nudes',
-    time: '2022-10-23T23:55:00.000',
-    sentByUser: false,
-  },
-  {
-    chatId: '10',
-    name: 'Dmitry Sviridov',
-    lastMessage: 'send nudes',
-    time: '2022-10-23T23:55:00.000',
-    sentByUser: false,
-  },
-];
-
 const Sidebar = () => {
   const dispatch = useAppDispatch();
   const auth = useAuth();
+
+  const { data: getChatsData, isLoading: getChatsIsLoading } =
+    useGetChatsQuery();
 
   const formattedName = useMemo(() => {
     if (!auth.user) {
@@ -120,7 +51,20 @@ const Sidebar = () => {
         </Button>
       </SidebarHeader>
       <Divider />
-      <ChatList chats={chatsMock} />
+      <ChatList
+        isLoading={getChatsIsLoading}
+        chats={
+          getChatsData
+            ? getChatsData.payload.map((chat) => ({
+                chatId: chat.id,
+                name: chat.participantDtoList[0].name,
+                lastMessage: chat.lastMessage.text,
+                sentByUser: chat.lastMessage.sentByUser,
+                time: chat.lastMessage.date,
+              }))
+            : []
+        }
+      />
     </SidebarContainer>
   );
 };

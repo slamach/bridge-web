@@ -1,4 +1,5 @@
 import ChatCard, { ChatCardProps } from '../ChatCard/ChatCard';
+import ChatCardSkeleton from '../ChatCard/ChatCardSkeleton';
 import {
   ChatListScrollArea,
   ChatListScrollBar,
@@ -9,6 +10,8 @@ import {
 
 interface ChatListProps {
   chats: ChatCardProps[];
+  isLoading?: boolean;
+  skeletonAmount?: number;
 }
 
 const ChatList = (props: ChatListProps) => {
@@ -16,11 +19,19 @@ const ChatList = (props: ChatListProps) => {
     <ChatListScrollArea scrollHideDelay={100}>
       <ChatListViewPort>
         <StyledChatList>
-          {props.chats.map((chat) => (
-            <li key={chat.chatId}>
-              <ChatCard {...chat} />
-            </li>
-          ))}
+          {props.isLoading
+            ? Array(props.skeletonAmount || 6)
+                .fill(0)
+                .map((_, index) => (
+                  <li key={index}>
+                    <ChatCardSkeleton />
+                  </li>
+                ))
+            : props.chats.map((chat) => (
+                <li key={chat.chatId}>
+                  <ChatCard {...chat} />
+                </li>
+              ))}
         </StyledChatList>
       </ChatListViewPort>
       <ChatListScrollBar orientation="vertical">
