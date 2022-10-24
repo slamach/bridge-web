@@ -24,8 +24,8 @@ interface RegisterFormData {
 }
 
 const loginValidationSchema = yup.object().shape({
-  name: yup.string().label('Display name').required(),
-  username: yup.string().label('Username').required().min(4),
+  name: yup.string().label('Display name').required().max(20),
+  username: yup.string().label('Username').required().min(4).max(20),
   password: yup.string().label('Password').required().min(8),
 });
 
@@ -53,8 +53,7 @@ const RegisterForm = () => {
       }).unwrap();
       dispatch(
         setPersistedCredentials({
-          // FIXME: Заменить на правильный тип
-          user: result.payload.userId,
+          user: result.payload.user,
           token: result.payload.token,
         })
       );
@@ -124,10 +123,15 @@ const RegisterForm = () => {
           serverError}
       </FormError>
       <ButtonGroup>
-        <Button type="submit" highlight disabled={registerResult.isLoading}>
+        <Button
+          size="m"
+          type="submit"
+          highlight
+          disabled={registerResult.isLoading}
+        >
           Create Account
         </Button>
-        <Button as={Link} to="/auth/login">
+        <Button size="m" as={Link} to="/auth/login">
           Log Into an Existing Account
         </Button>
       </ButtonGroup>

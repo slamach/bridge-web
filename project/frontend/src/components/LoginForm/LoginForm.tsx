@@ -50,8 +50,7 @@ const LoginForm = () => {
       }).unwrap();
       dispatch(
         setPersistedCredentials({
-          // FIXME: Заменить на правильный тип
-          user: result.payload.userId,
+          user: result.payload.user,
           token: result.payload.token,
         })
       );
@@ -102,10 +101,15 @@ const LoginForm = () => {
         {errors.username?.message || errors.password?.message || serverError}
       </FormError>
       <ButtonGroup>
-        <Button type="submit" highlight disabled={loginResult.isLoading}>
+        <Button
+          size="m"
+          type="submit"
+          highlight
+          disabled={loginResult.isLoading}
+        >
           Log In
         </Button>
-        <Button as={Link} to="/auth/register">
+        <Button size="m" as={Link} to="/auth/register">
           Create New Account
         </Button>
       </ButtonGroup>

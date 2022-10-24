@@ -6,6 +6,8 @@ export const InputGroupList = styled.ul`
   margin: 0;
 
   li {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 4px;
   }
 

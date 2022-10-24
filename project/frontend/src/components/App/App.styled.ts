@@ -18,14 +18,16 @@ export const theme: DefaultTheme = {
   },
   colors: {
     background: '#000000',
+    surface: '#1a1a1a',
+    surfaceHovered: '#242424',
     primary: '#ffffff',
     highlight: '#2787E7',
-    highlightHovered: '#1E7EDE',
-    highlightClicked: '#1878D8',
+    highlightHovered: '#1e7ede',
+    highlightClicked: '#1878d8',
     inputBackground: '#0f0f0f',
     elementsBackground: '#303030',
-    elementsBackgroundHovered: '#2C2C2C',
-    elementsBackgroundClicked: '#2A2A2A',
+    elementsBackgroundHovered: '#2c2c2c',
+    elementsBackgroundClicked: '#2a2a2a',
   },
 };
 

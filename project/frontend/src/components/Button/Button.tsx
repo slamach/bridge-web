@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
 interface ButtonProps {
+  size: 's' | 'm';
   highlight?: boolean;
 }
 
 const Button = styled.button<ButtonProps>`
-  display: block;
-  width: 100%;
-  padding: 14px;
-  font-size: 15px;
+  display: inline-block;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
@@ -16,9 +14,25 @@ const Button = styled.button<ButtonProps>`
   background-color: ${({ highlight, theme }) =>
     highlight ? theme.colors.highlight : theme.colors.elementsBackground};
   border: none;
-  border-radius: 14px;
   cursor: pointer;
+  user-select: none;
   transition: all 0.1s ease-in-out;
+
+  ${({ size }) => {
+    if (size === 's') {
+      return `
+        padding: 9px 14px;
+        font-size: 13px;
+        border-radius: 8px;
+      `;
+    } else if (size === 'm') {
+      return `
+        padding: 14px;
+        font-size: 15px;
+        border-radius: 14px;
+      `;
+    }
+  }}
 
   &:hover:not(:disabled) {
     background-color: ${({ highlight, theme }) =>

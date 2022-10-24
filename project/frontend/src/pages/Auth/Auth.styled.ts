@@ -13,6 +13,7 @@ export const AuthContainer = styled.main`
 
   & > img {
     margin-bottom: auto;
+    user-select: none;
   }
 `;
 
@@ -26,6 +27,7 @@ export const FormTitle = styled.h2`
   font-size: 22px;
   font-weight: 600;
   text-align: center;
+  user-select: none;
 `;
 
 export const FormContainer = styled.form`

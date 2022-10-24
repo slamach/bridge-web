@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledInput = styled.input`
-  display: block;
-  width: 100%;
+  display: inline-block;
   padding: 14px;
   font-size: 15px;
   font-weight: 500;
@@ -20,5 +19,6 @@ export const StyledInput = styled.input`
 `;
 
 export const HiddenLabel = styled.label`
-  display: block;
+  display: flex;
+  flex-direction: column;
 `;

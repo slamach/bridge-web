@@ -1,11 +1,8 @@
-export type User = string;
-
-// FIXME: Вернуть правильный тип
-// export interface User {
-//   id: string;
-//   name: string;
-//   username: string;
-// }
+export interface User {
+  id: string;
+  name: string;
+  username: string;
+}
 
 export interface AuthLoginDTO {
   username: string;
@@ -20,11 +17,22 @@ export interface AuthRegisterDTO {
 
 export interface AuthResponse {
   payload: {
-    // FIXME: Вернуть правильный тип
-    // user: User;
-    userId: string;
+    user: User;
     token: string;
   };
+}
+
+export interface Message {
+  id: string;
+  text: string;
+  date: string;
+  sentByUser: boolean;
+}
+
+export interface Chat {
+  id: string;
+  participantDtoList: User[];
+  lastMessage: Message;
 }
 
 export const ErrorStatusArray = [

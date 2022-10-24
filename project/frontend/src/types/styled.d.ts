@@ -14,6 +14,8 @@ declare module 'styled-components' {
     };
     colors: {
       background: string;
+      surface: string;
+      surfaceHovered: string;
       primary: string;
       highlight: string;
       highlightHovered: string;

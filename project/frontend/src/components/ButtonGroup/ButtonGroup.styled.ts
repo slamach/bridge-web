@@ -6,6 +6,8 @@ export const ButtonGroupList = styled.ul`
   list-style: none;
 
   li {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 14px;
   }
 
