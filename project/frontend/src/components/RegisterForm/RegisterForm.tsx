@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
@@ -14,8 +13,9 @@ import Button from '../Button/Button';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import Input from '../Input/Input';
 import InputGroup from '../InputGroup/InputGroup';
-import { setCredentials } from '../../state/slices/authSlice';
 import { handleAuthError } from '../../utils/errorHandling';
+import { useAppDispatch } from '../../hooks/stateHooks';
+import { setPersistedCredentials } from '../../state/slices/authSlice';
 
 interface RegisterFormData {
   name: string;
@@ -32,7 +32,7 @@ const loginValidationSchema = yup.object().shape({
 const RegisterForm = () => {
   const [serverError, setServerError] = useState<string>('');
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [registerUser, registerResult] = useRegisterMutation();
 
   const {
@@ -52,7 +52,7 @@ const RegisterForm = () => {
         password: data.password,
       }).unwrap();
       dispatch(
-        setCredentials({
+        setPersistedCredentials({
           // FIXME: Заменить на правильный тип
           user: result.payload.userId,
           token: result.payload.token,

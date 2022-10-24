@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../../types/api';
-import { RootState } from '../store';
+import { AppDispatch, RootState } from '../store';
 
 interface AuthState {
   user: User | null;
@@ -8,8 +8,8 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  user: null,
-  token: null,
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
+  token: localStorage.getItem('token'),
 };
 
 const authSlice = createSlice({
@@ -23,11 +23,28 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
+    clearCredentials: (state) => {
+      state.user = null;
+      state.token = null;
+    },
   },
 });
 
-export const { setCredentials } = authSlice.actions;
+export const { setCredentials, clearCredentials } = authSlice.actions;
 
 export default authSlice.reducer;
+
+export const setPersistedCredentials =
+  (credentials: { user: User; token: string }) => (dispatch: AppDispatch) => {
+    dispatch(setCredentials(credentials));
+    localStorage.setItem('user', JSON.stringify(credentials.user));
+    localStorage.setItem('token', credentials.token);
+  };
+
+export const clearPersistedCredentials = () => (dispatch: AppDispatch) => {
+  dispatch(clearCredentials());
+  localStorage.removeItem('user');
+  localStorage.removeItem('token');
+};
 
 export const selectCurrentUser = (state: RootState) => state.auth.user;

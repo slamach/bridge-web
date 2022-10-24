@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,13 +8,14 @@ import {
   FormTitle,
 } from '../../pages/Auth/Auth.styled';
 import { useLoginMutation } from '../../state/api/authAPI';
-import { setCredentials } from '../../state/slices/authSlice';
 import Button from '../Button/Button';
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import Input from '../Input/Input';
 import InputGroup from '../InputGroup/InputGroup';
 import { handleAuthError } from '../../utils/errorHandling';
 import { useState } from 'react';
+import { useAppDispatch } from '../../hooks/stateHooks';
+import { setPersistedCredentials } from '../../state/slices/authSlice';
 
 interface LoginFormData {
   username: string;
@@ -30,7 +30,7 @@ const loginValidationSchema = yup.object().shape({
 const LoginForm = () => {
   const [serverError, setServerError] = useState<string>('');
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [login, loginResult] = useLoginMutation();
 
   const {
@@ -49,7 +49,7 @@ const LoginForm = () => {
         password: data.password,
       }).unwrap();
       dispatch(
-        setCredentials({
+        setPersistedCredentials({
           // FIXME: Заменить на правильный тип
           user: result.payload.userId,
           token: result.payload.token,
