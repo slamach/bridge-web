@@ -1,7 +1,7 @@
 import { Chat, PayloadResponse } from '../../types/api';
 import api from '../api';
 
-const authAPI = api.injectEndpoints({
+const chatsAPI = api.injectEndpoints({
   endpoints: (builder) => ({
     getChats: builder.query<PayloadResponse<Chat[]>, void>({
       query: () => ({
@@ -12,4 +12,4 @@ const authAPI = api.injectEndpoints({
   }),
 });
 
-export const { useGetChatsQuery } = authAPI;
+export const { useGetChatsQuery } = chatsAPI;

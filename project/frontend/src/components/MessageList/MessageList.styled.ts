@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
+import { MessageContainer } from '../Message/Message.styled';
 
 export const StyledMessageList = styled.ul`
   display: flex;
@@ -11,8 +12,20 @@ export const StyledMessageList = styled.ul`
   padding: 0;
   list-style: none;
 
-  li {
+  ${MessageContainer} {
     max-width: 80%;
+  }
+
+  svg {
+    display: block;
+  }
+
+  svg[data-direction='normal'] {
+    margin-left: auto;
+  }
+
+  svg[data-direction='reversed'] {
+    margin-right: auto;
   }
 `;
 
@@ -20,6 +33,7 @@ export const MessageListContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
   padding-right: 17px;
 
   ${StyledMessageList} {
@@ -27,24 +41,28 @@ export const MessageListContainer = styled.div`
   }
 `;
 
-export const ChatListScrollArea = styled(ScrollAreaPrimitive.Root)`
+export const MessageListScrollArea = styled(ScrollAreaPrimitive.Root)`
   overflow: hidden;
 `;
 
-export const ChatListViewPort = styled(ScrollAreaPrimitive.Viewport)`
+export const MessageListViewPort = styled(ScrollAreaPrimitive.Viewport)`
   width: 100%;
   height: 100%;
+
+  & > div {
+    height: 100%;
+  }
 `;
 
-export const ChatListScrollBar = styled(ScrollAreaPrimitive.Scrollbar)`
+export const MessageListScrollBar = styled(ScrollAreaPrimitive.Scrollbar)`
   display: flex;
   width: 7px;
-  background-color: ${({ theme }) => theme.colors.surface};
+  background-color: ${({ theme }) => theme.colors.background};
   user-select: none;
   touch-action: none;
 `;
 
-export const ChatListThumb = styled(ScrollAreaPrimitive.Thumb)`
+export const MessageListThumb = styled(ScrollAreaPrimitive.Thumb)`
   position: 'relative';
   flex: 1;
   background-color: ${({ theme }) => theme.colors.primary};

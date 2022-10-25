@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { AvatarContainer } from '../../components/Avatar/Avatar.styled';
-import { MessageListContainer } from '../../components/MessageList/MessageList.styled';
+import { MessageListScrollArea } from '../../components/MessageList/MessageList.styled';
 
 export const ChatHeaderInfo = styled.div`
   h2 {
@@ -39,7 +39,7 @@ export const ChatContainer = styled.section`
   height: 100%;
   padding-bottom: 30px;
 
-  ${MessageListContainer} {
+  ${MessageListScrollArea} {
     flex-grow: 1;
   }
 

@@ -1,3 +1,9 @@
+import { useMemo } from 'react';
+import {
+  getDayAndMonthFromDate,
+  getTimeFromDate,
+  isToday,
+} from '../../utils/dateUtils';
 import { MessageContainer } from './Message.styled';
 
 export interface MessageProps {
@@ -7,10 +13,18 @@ export interface MessageProps {
 }
 
 const Message = (props: MessageProps) => {
+  const timeObject = useMemo(() => {
+    return props.time ? new Date(props.time) : null;
+  }, [props.time]);
+
   return (
     <MessageContainer sentByUser={props.sentByUser}>
       <p>{props.content}</p>
-      <time>{props.time}</time>
+      <time>
+        {isToday(timeObject!)
+          ? getTimeFromDate(timeObject!)
+          : getDayAndMonthFromDate(timeObject!)}
+      </time>
     </MessageContainer>
   );
 };

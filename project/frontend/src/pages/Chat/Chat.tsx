@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Avatar from '../../components/Avatar/Avatar';
 import MessageList from '../../components/MessageList/MessageList';
 import { useGetChatsQuery } from '../../state/api/chatsAPI';
+import { useGetMessagesQuery } from '../../state/api/messagesAPI';
 import {
   ChatContainer,
   ChatHeader,
@@ -14,28 +15,12 @@ import ChatHeaderCardSkeleton from './ChatHeaderCardSkeleton';
 const MAX_NAME_CHARACTERS = 20;
 const MAX_USERNAME_CHARACTERS = 20;
 
-const messagesMock = [
-  {
-    content: 'Hello ma friend!',
-    time: '12:08',
-    sentByUser: true,
-  },
-  {
-    content: 'Hello!',
-    time: '12:09',
-    sentByUser: false,
-  },
-  {
-    content: 'How a u!',
-    time: '12:10',
-    sentByUser: true,
-  },
-];
-
 const Chat = () => {
   const { chatId } = useParams<{ chatId: string }>();
   const { data: getChatsData, isLoading: getChatsIsLoading } =
     useGetChatsQuery();
+  const { data: getMessagesData, isLoading: getMessagesIsLoading } =
+    useGetMessagesQuery(chatId!);
 
   const chat = useMemo(() => {
     if (chatId) {
@@ -92,7 +77,19 @@ const Chat = () => {
           </ChatHeaderCard>
         )}
       </ChatHeader>
-      <MessageList messages={messagesMock} />
+      <MessageList
+        isLoading={getMessagesIsLoading}
+        skeletonAmount={5}
+        messages={
+          getMessagesData
+            ? getMessagesData.payload.content.map((message) => ({
+                content: message.text,
+                time: message.date,
+                sentByUser: message.sentByUser,
+              }))
+            : []
+        }
+      />
     </ChatContainer>
   );
 };

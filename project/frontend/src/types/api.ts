@@ -38,6 +38,18 @@ export interface Chat {
   lastMessage: Message;
 }
 
+export interface Page<T> {
+  content: T[];
+  totalPages: number;
+  totalElements: number;
+}
+
+export interface Pageable {
+  page?: number;
+  size?: number;
+  sort?: string[];
+}
+
 export const ErrorStatusArray = [
   'OK',
   'BAD_REQUEST',
