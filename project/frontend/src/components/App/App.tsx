@@ -7,6 +7,7 @@ import RegisterForm from '../RegisterForm/RegisterForm';
 import PrivateOutlet from '../PrivateOutlet/PrivateOutlet';
 import Home from '../../pages/Home/Home';
 import EmptyChat from '../../pages/EmptyChat/EmptyChat';
+import Chat from '../../pages/Chat/Chat';
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
         <Route element={<PrivateOutlet />}>
           <Route path="/" element={<Home />}>
             <Route index element={<EmptyChat />} />
-            <Route path=":chatId" element={<p>Some chat</p>} />
+            <Route path=":chatId" element={<Chat />} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/auth" />} />

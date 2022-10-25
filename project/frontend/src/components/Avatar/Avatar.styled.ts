@@ -10,6 +10,7 @@ export const AvatarContainer = styled.div<AvatarContainerProps>`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.elementsBackground};
   border-radius: 50%;
+  user-select: none;
 
   p {
     margin: 0;

@@ -15,9 +15,17 @@ export interface ChatCardProps {
   time?: string | null;
 }
 
+const MAX_NAME_CHARACTERS = 20;
 const MAX_MESSAGE_CHARACTERS = 35;
 
 const ChatCard = (props: ChatCardProps) => {
+  const formattedName = useMemo(() => {
+    if (props.name.length > MAX_NAME_CHARACTERS) {
+      return props.name.slice(0, MAX_NAME_CHARACTERS - 3) + '...';
+    }
+    return props.name;
+  }, [props.name]);
+
   const formattedMessage = useMemo(() => {
     if (!props.lastMessage) {
       return '';
@@ -35,14 +43,14 @@ const ChatCard = (props: ChatCardProps) => {
 
   return (
     <ChatCardContainer>
-      <Avatar size="m" name={props.name} />
+      <Avatar size="m" name={formattedName} />
       <ChatCardInfo>
         <div>
-          <h2>{props.name}</h2>
+          <h2>{formattedName}</h2>
           <p>{formattedMessage || 'No messages yet'}</p>
         </div>
         {Boolean(props.time) && Boolean(timeObject) && (
-          <time dateTime={props.time!}>
+          <time>
             {isToday(timeObject!)
               ? getTimeFromDate(timeObject!)
               : getDayAndMonthFromDate(timeObject!)}

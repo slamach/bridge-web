@@ -39,9 +39,8 @@ export const SidebarContainer = styled.section`
   flex-direction: column;
   overflow: hidden;
   width: 409px;
-  padding: 20px 10px;
+  padding: 10px;
   background-color: ${({ theme }) => theme.colors.surface};
-  border-radius: 0 30px 30px 0;
   user-select: none;
 
   ${SidebarHeader} {

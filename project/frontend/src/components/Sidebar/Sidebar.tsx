@@ -40,7 +40,7 @@ const Sidebar = () => {
     <SidebarContainer>
       <SidebarHeader>
         <SidebarUserInfo>
-          <Avatar size="s" name={auth.user?.name} />
+          <Avatar size="s" name={formattedName} />
           <div>
             <p>Logged as</p>
             <p>{formattedName}</p>
