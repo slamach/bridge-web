@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface ButtonProps {
   size: 's' | 'm';
   highlight?: boolean;
+  icon?: boolean;
 }
 
 const Button = styled.button<ButtonProps>`
@@ -33,6 +34,19 @@ const Button = styled.button<ButtonProps>`
       `;
     }
   }}
+
+  ${({ icon }) =>
+    icon
+      ? `
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+  `
+      : ``}
 
   &:hover:not(:disabled) {
     background-color: ${({ highlight, theme }) =>

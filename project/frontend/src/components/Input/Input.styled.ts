@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const StyledInput = styled.input`
   display: inline-block;
   padding: 14px;
+  font-family: inherit;
   font-size: 15px;
   font-weight: 500;
   color: ${({ theme }) => theme.colors.primary};

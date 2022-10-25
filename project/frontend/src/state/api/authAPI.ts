@@ -9,6 +9,7 @@ const authAPI = api.injectEndpoints({
         method: 'POST',
         body: credentials,
       }),
+      invalidatesTags: ['Chats', 'Messages'],
     }),
     register: builder.mutation<AuthResponse, AuthRegisterDTO>({
       query: (credentials) => ({
@@ -16,6 +17,7 @@ const authAPI = api.injectEndpoints({
         method: 'POST',
         body: credentials,
       }),
+      invalidatesTags: ['Chats', 'Messages'],
     }),
   }),
 });

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
-import { MessageContainer } from '../Message/Message.styled';
 
 export const StyledMessageList = styled.ul`
   display: flex;
@@ -11,10 +10,6 @@ export const StyledMessageList = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
-
-  ${MessageContainer} {
-    max-width: 80%;
-  }
 
   svg {
     display: block;

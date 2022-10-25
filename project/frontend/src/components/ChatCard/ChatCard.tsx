@@ -16,7 +16,7 @@ export interface ChatCardProps {
 }
 
 const MAX_NAME_CHARACTERS = 20;
-const MAX_MESSAGE_CHARACTERS = 35;
+const MAX_MESSAGE_CHARACTERS = 28;
 
 const ChatCard = (props: ChatCardProps) => {
   const formattedName = useMemo(() => {
@@ -42,7 +42,7 @@ const ChatCard = (props: ChatCardProps) => {
   }, [props.time]);
 
   return (
-    <ChatCardContainer>
+    <ChatCardContainer to={`/${props.chatId}`}>
       <Avatar size="m" name={formattedName} />
       <ChatCardInfo>
         <div>

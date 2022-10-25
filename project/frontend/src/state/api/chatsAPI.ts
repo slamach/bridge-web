@@ -8,6 +8,7 @@ const chatsAPI = api.injectEndpoints({
         url: 'chat',
         method: 'GET',
       }),
+      providesTags: ['Chats'],
     }),
   }),
 });

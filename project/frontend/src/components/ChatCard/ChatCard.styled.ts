@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { AvatarContainer } from '../Avatar/Avatar.styled';
 
@@ -20,14 +21,15 @@ export const ChatCardInfo = styled.div`
     font-size: 15px;
     font-weight: 400;
     color: ${({ theme }) => theme.colors.primary};
-    opacity: 0.5;
+    opacity: 0.6;
   }
 `;
 
-export const ChatCardContainer = styled.article`
+export const ChatCardContainer = styled(NavLink)`
   display: flex;
   align-items: center;
   padding: 8px 17px;
+  text-decoration: none;
   border-radius: 14px;
   background-color: ${({ theme }) => theme.colors.surface};
   cursor: pointer;
@@ -39,5 +41,9 @@ export const ChatCardContainer = styled.article`
 
   ${AvatarContainer} {
     margin-right: 11px;
+  }
+
+  &.active {
+    background-color: ${({ theme }) => theme.colors.highlightHovered};
   }
 `;

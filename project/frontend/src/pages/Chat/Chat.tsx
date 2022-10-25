@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import Avatar from '../../components/Avatar/Avatar';
+import MessageForm from '../../components/MessageForm/MessageForm';
 import MessageList from '../../components/MessageList/MessageList';
+import { useAuth } from '../../hooks/useAuth';
 import { useGetChatsQuery } from '../../state/api/chatsAPI';
 import { useGetMessagesQuery } from '../../state/api/messagesAPI';
 import {
@@ -20,7 +22,11 @@ const Chat = () => {
   const { data: getChatsData, isLoading: getChatsIsLoading } =
     useGetChatsQuery();
   const { data: getMessagesData, isLoading: getMessagesIsLoading } =
-    useGetMessagesQuery(chatId!);
+    useGetMessagesQuery(chatId!, {
+      pollingInterval: 1000,
+    });
+
+  const auth = useAuth();
 
   const chat = useMemo(() => {
     if (chatId) {
@@ -89,6 +95,11 @@ const Chat = () => {
               }))
             : []
         }
+      />
+      <MessageForm
+        disabled={getChatsIsLoading || getMessagesIsLoading}
+        chatId={chatId}
+        senderId={auth.user?.id}
       />
     </ChatContainer>
   );

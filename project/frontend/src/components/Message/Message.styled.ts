@@ -24,7 +24,7 @@ export const MessageContainer = styled.div<MessageContainerProps>`
   time {
     font-size: 12px;
     color: ${({ theme }) => theme.colors.primary};
-    opacity: 0.5;
+    opacity: 0.6;
     user-select: none;
   }
 `;

@@ -38,6 +38,12 @@ export interface Chat {
   lastMessage: Message;
 }
 
+export interface SendMessageDTO {
+  senderId: string;
+  chatId: string;
+  text: string;
+}
+
 export interface Page<T> {
   content: T[];
   totalPages: number;

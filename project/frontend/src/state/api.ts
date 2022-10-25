@@ -3,6 +3,7 @@ import { baseQuery } from './baseQuery';
 
 const api = createApi({
   baseQuery: baseQuery,
+  tagTypes: ['Chats', 'Messages'],
   endpoints: () => ({}),
 });
 

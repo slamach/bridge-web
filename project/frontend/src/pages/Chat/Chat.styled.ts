@@ -15,7 +15,7 @@ export const ChatHeaderInfo = styled.div`
     font-size: 15px;
     font-weight: 400;
     color: ${({ theme }) => theme.colors.primary};
-    opacity: 0.5;
+    opacity: 0.6;
   }
 `;
 
@@ -41,6 +41,7 @@ export const ChatContainer = styled.section`
 
   ${MessageListScrollArea} {
     flex-grow: 1;
+    margin-bottom: 20px;
   }
 
   ${ChatHeader} {
