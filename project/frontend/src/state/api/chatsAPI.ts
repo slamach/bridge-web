@@ -14,3 +14,5 @@ const chatsAPI = api.injectEndpoints({
 });
 
 export const { useGetChatsQuery } = chatsAPI;
+
+export default chatsAPI;

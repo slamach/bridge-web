@@ -23,7 +23,7 @@ const MessageList = (props: MessageListProps) => {
     if (!props.isLoading) {
       scrollRef.current!.scrollTo(0, scrollRef.current!.scrollHeight);
     }
-  }, [props.isLoading, props.messages]);
+  }, [props.isLoading]);
 
   return (
     <MessageListScrollArea>

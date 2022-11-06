@@ -1,9 +1,4 @@
-import {
-  Message,
-  Page,
-  PayloadResponse,
-  SendMessageDTO,
-} from '../../types/api';
+import { PayloadResponse, Message, Page } from '../../types/api';
 import api from '../api';
 
 const messagesAPI = api.injectEndpoints({
@@ -20,15 +15,9 @@ const messagesAPI = api.injectEndpoints({
       }),
       providesTags: ['Messages'],
     }),
-    sendMessage: builder.mutation<PayloadResponse<Message>, SendMessageDTO>({
-      query: (sendMessageDTO) => ({
-        url: 'message',
-        method: 'POST',
-        body: sendMessageDTO,
-      }),
-      invalidatesTags: ['Chats', 'Messages'],
-    }),
   }),
 });
 
-export const { useGetMessagesQuery, useSendMessageMutation } = messagesAPI;
+export const { useGetMessagesQuery } = messagesAPI;
+
+export default messagesAPI;

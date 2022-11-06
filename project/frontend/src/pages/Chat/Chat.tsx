@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import Avatar from '../../components/Avatar/Avatar';
 import MessageForm from '../../components/MessageForm/MessageForm';
 import MessageList from '../../components/MessageList/MessageList';
+import { useAppSelector } from '../../hooks/stateHooks';
 import { useAuth } from '../../hooks/useAuth';
 import { useGetChatsQuery } from '../../state/api/chatsAPI';
 import { useGetMessagesQuery } from '../../state/api/messagesAPI';
+import { selectWebSocketLoading } from '../../state/slices/webSocketSlice';
 import {
   ChatContainer,
   ChatHeader,
@@ -19,14 +21,13 @@ const MAX_USERNAME_CHARACTERS = 20;
 
 const Chat = () => {
   const { chatId } = useParams<{ chatId: string }>();
+  const auth = useAuth();
+
   const { data: getChatsData, isLoading: getChatsIsLoading } =
     useGetChatsQuery();
   const { data: getMessagesData, isLoading: getMessagesIsLoading } =
-    useGetMessagesQuery(chatId!, {
-      pollingInterval: 1000,
-    });
-
-  const auth = useAuth();
+    useGetMessagesQuery(chatId!);
+  const webSocketIsLoading = useAppSelector(selectWebSocketLoading);
 
   const chat = useMemo(() => {
     if (chatId) {
@@ -97,7 +98,9 @@ const Chat = () => {
         }
       />
       <MessageForm
-        disabled={getChatsIsLoading || getMessagesIsLoading}
+        disabled={
+          getChatsIsLoading || getMessagesIsLoading || webSocketIsLoading
+        }
         chatId={chatId}
         senderId={auth.user?.id}
       />

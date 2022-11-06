@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useSendMessageMutation } from '../../state/api/messagesAPI';
 import { VisuallyHidden } from '../App/App.styled';
 import Button from '../Button/Button';
 import {
@@ -8,6 +7,8 @@ import {
   StyledMessageForm,
 } from './MessageForm.styled';
 import { ReactComponent as ArrowIcon } from '../../assets/img/arrow.svg';
+import { useAppDispatch } from '../../hooks/stateHooks';
+import { publishMessage } from '../../state/slices/webSocketSlice';
 
 interface MessageFormProps {
   senderId?: string;
@@ -16,8 +17,9 @@ interface MessageFormProps {
 }
 
 const MessageForm = (props: MessageFormProps) => {
+  const dispatch = useAppDispatch();
+
   const [value, setValue] = useState<string>('');
-  const [sendMessage] = useSendMessageMutation();
 
   const finallyDisabled = props.disabled || !props.chatId || !props.senderId;
 
@@ -41,11 +43,16 @@ const MessageForm = (props: MessageFormProps) => {
   };
 
   const submit = () => {
-    sendMessage({
-      senderId: props.senderId!,
-      chatId: props.chatId!,
-      text: value,
-    });
+    if (!value) {
+      return;
+    }
+    dispatch(
+      publishMessage({
+        senderId: props.senderId!,
+        chatId: props.chatId!,
+        text: value,
+      })
+    );
     setValue('');
   };
 
