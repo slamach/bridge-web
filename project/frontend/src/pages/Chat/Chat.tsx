@@ -51,22 +51,20 @@ const Chat = () => {
 
   const formattedUsername = useMemo(() => {
     if (!chat) {
-      return '@??????';
+      return '??????';
     }
     if (
       chat.participantDtoList[0].username.length >
       MAX_USERNAME_CHARACTERS - 1
     ) {
       return (
-        '@' +
         chat.participantDtoList[0].username.slice(
           0,
           MAX_USERNAME_CHARACTERS - 4
-        ) +
-        '...'
+        ) + '...'
       );
     }
-    return '@' + chat.participantDtoList[0].username;
+    return chat.participantDtoList[0].username;
   }, [chat]);
 
   return (
@@ -79,7 +77,10 @@ const Chat = () => {
             <Avatar size="m" name={formattedName} />
             <ChatHeaderInfo>
               <h2>{formattedName}</h2>
-              <p>{formattedUsername}</p>
+              <p>
+                <span>@</span>
+                {formattedUsername}
+              </p>
             </ChatHeaderInfo>
           </ChatHeaderCard>
         )}

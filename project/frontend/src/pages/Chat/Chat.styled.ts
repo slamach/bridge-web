@@ -17,6 +17,10 @@ export const ChatHeaderInfo = styled.div`
     color: ${({ theme }) => theme.colors.primary};
     opacity: 0.6;
   }
+
+  span {
+    user-select: none;
+  }
 `;
 
 export const ChatHeaderCard = styled.div`
