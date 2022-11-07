@@ -10,7 +10,6 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(startWebSocketConnection());
-    console.log(123);
     // eslint-disable-next-line
   }, []);
 

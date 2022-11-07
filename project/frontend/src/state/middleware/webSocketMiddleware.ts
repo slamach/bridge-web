@@ -42,6 +42,8 @@ const webSocketMiddleware: Middleware<{}, RootState, AppDispatch> = (store) => {
             );
             if (chat) {
               chat.lastMessage = message;
+            } else {
+              store.dispatch(chatsAPI.util.invalidateTags(['Chats']));
             }
           })
         );

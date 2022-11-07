@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { VisuallyHidden } from '../App/App.styled';
 import Button from '../Button/Button';
 import {
@@ -18,8 +18,13 @@ interface MessageFormProps {
 
 const MessageForm = (props: MessageFormProps) => {
   const dispatch = useAppDispatch();
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const [value, setValue] = useState<string>('');
+
+  useLayoutEffect(() => {
+    inputRef.current?.focus();
+  });
 
   const finallyDisabled = props.disabled || !props.chatId || !props.senderId;
 
@@ -29,8 +34,7 @@ const MessageForm = (props: MessageFormProps) => {
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (evt.key === 'Enter' && !evt.shiftKey) {
-      evt.preventDefault();
-      submit();
+      handleSubmit(evt);
     }
   };
 
@@ -38,14 +42,11 @@ const MessageForm = (props: MessageFormProps) => {
     evt.preventDefault();
 
     if (value.length > 0 && !finallyDisabled) {
-      submit();
+      submit(value);
     }
   };
 
-  const submit = () => {
-    if (!value) {
-      return;
-    }
+  const submit = (value: string) => {
     dispatch(
       publishMessage({
         senderId: props.senderId!,
@@ -63,7 +64,8 @@ const MessageForm = (props: MessageFormProps) => {
           minRows={1}
           maxRows={5}
           value={value}
-          placeholder="Send message..."
+          ref={inputRef}
+          placeholder="Enter a message..."
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           disabled={finallyDisabled}

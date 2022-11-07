@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { StyledAddChatForm } from '../AddChatForm/AddChatForm.styled';
 import { AvatarContainer } from '../Avatar/Avatar.styled';
 import Divider from '../Divider/Divider';
 
@@ -48,6 +49,10 @@ export const SidebarContainer = styled.section`
   }
 
   ${Divider} {
+    margin-bottom: 10px;
+  }
+
+  ${StyledAddChatForm} {
     margin-bottom: 10px;
   }
 `;

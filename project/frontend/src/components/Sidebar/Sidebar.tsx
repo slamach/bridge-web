@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../hooks/stateHooks';
 import { useAuth } from '../../hooks/useAuth';
 import { useGetChatsQuery } from '../../state/api/chatsAPI';
 import { clearPersistedCredentials } from '../../state/slices/authSlice';
+import { AddChatForm } from '../AddChatForm/AddChatForm';
 import Avatar from '../Avatar/Avatar';
 import Button from '../Button/Button';
 import ChatList from '../ChatList/ChatList';
@@ -51,6 +52,7 @@ const Sidebar = () => {
         </Button>
       </SidebarHeader>
       <Divider />
+      <AddChatForm />
       <ChatList
         isLoading={getChatsIsLoading}
         chats={
@@ -58,9 +60,9 @@ const Sidebar = () => {
             ? getChatsData.payload.map((chat) => ({
                 chatId: chat.id,
                 name: chat.participantDtoList[0].name,
-                lastMessage: chat.lastMessage.text,
-                sentByUser: chat.lastMessage.sentByUser,
-                time: chat.lastMessage.date,
+                lastMessage: chat.lastMessage?.text,
+                sentByUser: chat.lastMessage?.sentByUser,
+                time: chat.lastMessage?.date,
               }))
             : []
         }

@@ -40,6 +40,10 @@ export interface Chat {
   lastMessage: Message;
 }
 
+export interface ChatCreationDTO {
+  participants: string[];
+}
+
 export interface SendMessageDTO {
   senderId: string;
   chatId: string;
