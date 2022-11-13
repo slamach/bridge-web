@@ -2,21 +2,28 @@ package com.messenger.controller;
 
 import com.messenger.dto.model.MessageDto;
 import com.messenger.dto.model.Response;
+import com.messenger.model.User;
+import com.messenger.service.ChatService;
 import com.messenger.service.MessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/message")
 public class MessageController {
 
+    private final SimpMessagingTemplate simpMessagingTemplate;
     private final MessageService messageService;
+    private final ChatService chatService;
 
     @PostMapping
     @Operation(summary = "send message through http")
@@ -35,5 +42,14 @@ public class MessageController {
     public Response<Void> deleteMessage(@RequestBody Long id) {
         messageService.delete(id);
         return new Response<>("Message was successfully deleted");
+    }
+
+    @MessageMapping("/messages")
+    public void exchangeMessages(MessageDto messageDto) {
+        messageDto = messageService.save(messageDto);
+        List<User> receivers = chatService.getReceivers(messageDto);
+        for (User receiver : receivers) {
+            simpMessagingTemplate.convertAndSendToUser(receiver.getId().toString(), "/queue/messages", messageDto);
+        }
     }
 }

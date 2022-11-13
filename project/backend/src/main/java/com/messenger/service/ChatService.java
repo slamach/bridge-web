@@ -2,6 +2,7 @@ package com.messenger.service;
 
 import com.messenger.dto.mapper.ChatMapper;
 import com.messenger.dto.model.ChatDto;
+import com.messenger.dto.model.MessageDto;
 import com.messenger.exception.BadRequestException;
 import com.messenger.exception.EntityAlreadyExistsException;
 import com.messenger.exception.EntityNotFoundException;
@@ -42,6 +43,11 @@ public class ChatService {
         return chatRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("Chat was not found")
         );
+    }
+
+    public List<User> getReceivers(MessageDto messageDto) {
+        Chat chat = getChatById(messageDto.getChatId());
+        return chat.getParticipants();
     }
 
     public boolean isExists(Long id) {
