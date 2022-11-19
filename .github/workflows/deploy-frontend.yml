@@ -52,3 +52,5 @@ jobs:
             bucket-region: ${{ secrets.FRONTEND_S3_BUCKET_REGION }}
             dist-id: ${{ secrets.FRONTEND_CLOUDFRONT_DISTRIBUTION_ID }}
             delete-removed: true
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
