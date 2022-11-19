@@ -1,0 +1,54 @@
+name: Deploy client to Personal Virtual Server
+
+on:
+  push:
+    paths:
+      - "project/frontend/**"
+    branches: [master]
+  pull_request:
+    paths:
+      - "project/frontend/**"
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: project/frontend
+
+    strategy:
+      matrix:
+        node-version: [16]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: "https://registry.npmjs.org"
+          cache: "npm"
+
+      - name: Install dependencies 📦
+        run: npm ci
+
+      - name: Build project 🔧
+        run: npm run build
+        env:
+          REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+          REACT_APP_SOCK_URL: ${{ secrets.REACT_APP_SOCK_URL }}
+          REACT_APP_BROKER_URL: ${{ secrets.REACT_APP_BROKER_URL }}
+
+      - name: Deploy to AWS 🚀
+          uses: reggionick/s3-deploy@v3
+          with:
+            folder: build
+            bucket: ${{ secrets.FRONTEND_S3_BUCKET }}
+            bucket-region: ${{ secrets.FRONTEND_S3_BUCKET_REGION }}
+            dist-id: ${{ secrets.FRONTEND_CLOUDFRONT_DISTRIBUTION_ID }}
+            delete-removed: true
