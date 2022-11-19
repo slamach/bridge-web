@@ -1,4 +1,4 @@
-name: Deploy client to Personal Virtual Server
+name: Deplot frontend to AWS
 
 on:
   push:
