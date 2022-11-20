@@ -22,7 +22,6 @@ const MAX_USERNAME_CHARACTERS = 20;
 const Chat = () => {
   const { chatId: rawChatId } = useParams<{ chatId: string }>();
   const chatId = Number(rawChatId);
-  console.log(rawChatId);
   const auth = useAuth();
 
   const { data: getChatsData, isLoading: getChatsIsLoading } =
