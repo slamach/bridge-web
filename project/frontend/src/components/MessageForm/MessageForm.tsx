@@ -11,8 +11,8 @@ import { useAppDispatch } from '../../hooks/stateHooks';
 import { publishMessage } from '../../state/slices/webSocketSlice';
 
 interface MessageFormProps {
-  senderId?: string;
-  chatId?: string;
+  senderId?: number;
+  chatId?: number;
   disabled?: boolean;
 }
 

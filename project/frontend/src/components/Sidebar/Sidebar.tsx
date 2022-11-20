@@ -15,6 +15,7 @@ import {
 } from './Siderbar.styled';
 
 const MAX_NAME_CHARACTERS = 20;
+const MAX_USERNAME_CHARACTERS = 20;
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +34,16 @@ const Sidebar = () => {
     return auth.user.name;
   }, [auth.user]);
 
+  const formattedUsername = useMemo(() => {
+    if (!auth.user) {
+      return '??????';
+    }
+    if (auth.user.username.length > MAX_USERNAME_CHARACTERS - 1) {
+      return auth.user.username.slice(0, MAX_USERNAME_CHARACTERS - 4) + '...';
+    }
+    return auth.user.username;
+  }, [auth.user]);
+
   const handleLogout = () => {
     dispatch(clearPersistedCredentials());
   };
@@ -43,7 +54,10 @@ const Sidebar = () => {
         <SidebarUserInfo>
           <Avatar size="s" name={formattedName} />
           <div>
-            <p>Logged as</p>
+            <p>
+              <span>@</span>
+              {formattedUsername}
+            </p>
             <p>{formattedName}</p>
           </div>
         </SidebarUserInfo>

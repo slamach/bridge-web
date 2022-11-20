@@ -1,5 +1,5 @@
 export interface User {
-  id: string;
+  id: number;
   name: string;
   username: string;
 }
@@ -26,27 +26,27 @@ export interface AuthResponse
   }> {}
 
 export interface Message {
-  id: string;
+  id: number;
   text: string;
   date: string;
   sentByUser: boolean;
-  senderId: string;
-  chatId: string;
+  senderId: number;
+  chatId: number;
 }
 
 export interface Chat {
-  id: string;
+  id: number;
   participantDtoList: User[];
   lastMessage: Message;
 }
 
 export interface ChatCreationDTO {
-  participants: string[];
+  participants: number[];
 }
 
 export interface SendMessageDTO {
-  senderId: string;
-  chatId: string;
+  senderId: number;
+  chatId: number;
   text: string;
 }
 

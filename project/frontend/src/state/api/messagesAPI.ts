@@ -3,7 +3,7 @@ import api from '../api';
 
 const messagesAPI = api.injectEndpoints({
   endpoints: (builder) => ({
-    getMessages: builder.query<PayloadResponse<Page<Message>>, string>({
+    getMessages: builder.query<PayloadResponse<Page<Message>>, number>({
       query: (chatId) => ({
         url: 'message',
         method: 'GET',

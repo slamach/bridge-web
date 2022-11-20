@@ -20,11 +20,17 @@ export const SidebarUserInfo = styled.div`
     margin-bottom: 2px;
     font-weight: 400;
     font-size: 11px;
+    user-select: text;
   }
 
   div p:last-child {
     font-weight: 500;
     font-size: 18px;
+    user-select: text;
+  }
+
+  div span {
+    user-select: none;
   }
 `;
 

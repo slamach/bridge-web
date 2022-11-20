@@ -8,7 +8,7 @@ import Avatar from '../Avatar/Avatar';
 import { ChatCardContainer, ChatCardInfo } from './ChatCard.styled';
 
 export interface ChatCardProps {
-  chatId: string;
+  chatId: number;
   name: string;
   lastMessage?: string | null;
   sentByUser?: boolean | null;
