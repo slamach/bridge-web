@@ -61,6 +61,7 @@ const webSocketMiddleware: Middleware<{}, RootState, AppDispatch> = (store) => {
           stompClient!.subscribe('/user/queue/messages', handleMessage);
           store.dispatch(webSocketConnectionStarted());
         },
+        debug: console.log,
       });
 
       stompClient.activate();
