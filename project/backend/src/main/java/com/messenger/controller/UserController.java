@@ -29,10 +29,10 @@ public class UserController {
         return new Response<>(userService.getUserDtoById(id));
     }
 
-    @GetMapping("/name/{name}")
-    @Operation(summary = "find user by name")
-    public Response<Page<UserDto>> findUserByName(@PathVariable String name, Pageable pageable) {
-        return new Response<>(userService.findByName(name, pageable));
+    @GetMapping("/name/{username}")
+    @Operation(summary = "find user by username")
+    public Response<Page<UserDto>> findUserByUsername(@PathVariable String username, Pageable pageable) {
+        return new Response<>(userService.findByName(username, pageable));
     }
 
     @PutMapping("/password")

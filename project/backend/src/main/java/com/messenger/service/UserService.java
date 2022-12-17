@@ -46,8 +46,8 @@ public class UserService {
         return userRepository.existsByUsername(username);
     }
 
-    public Page<UserDto> findByName(String name, Pageable pageable) {
-        Page<User> users = userRepository.findAllByName(name, pageable);
+    public Page<UserDto> findByName(String username, Pageable pageable) {
+        Page<User> users = userRepository.findAllByUsername(username, pageable);
         return users.map(userMapper::createFrom);
     }
 
