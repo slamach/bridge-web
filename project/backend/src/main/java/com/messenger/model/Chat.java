@@ -32,4 +32,14 @@ public class Chat {
         }
         return false;
     }
+
+    public boolean isPersonalChat() {
+        final User me = participants.get(0);
+        for (User participant : participants) {
+            if (!participant.equals(me)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
