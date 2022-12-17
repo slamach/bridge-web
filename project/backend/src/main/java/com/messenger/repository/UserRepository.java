@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Page<User> findAllByUsername(String username, Pageable pageable);
+    Page<User> findAllByUsernameContainsIgnoreCase(String username, Pageable pageable);
 
     Optional<User> findByUsername(String username);
 

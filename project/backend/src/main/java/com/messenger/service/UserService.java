@@ -47,7 +47,7 @@ public class UserService {
     }
 
     public Page<UserDto> findByName(String username, Pageable pageable) {
-        Page<User> users = userRepository.findAllByUsername(username, pageable);
+        Page<User> users = userRepository.findAllByUsernameContainsIgnoreCase(username, pageable);
         return users.map(userMapper::createFrom);
     }
 
