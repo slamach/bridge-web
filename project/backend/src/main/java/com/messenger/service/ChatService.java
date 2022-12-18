@@ -76,6 +76,8 @@ public class ChatService {
     private void checkPermission(Chat chat) {
         if (!isParticipant(chat)) {
             throw new BadRequestException("You can not create new chat for other users");
+        } else if (chat.isPersonalChat()) {
+            throw new BadRequestException("Personal chats are not supported yet");
         }
 
         checkForDuplicate(chat);

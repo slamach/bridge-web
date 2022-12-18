@@ -3,6 +3,7 @@ package com.messenger.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -18,5 +19,6 @@ public class User {
     private Long version = 0L;
     private String name;
     private String description;
+    private LocalDateTime registrationDate = LocalDateTime.now();
     private Long imageId;
 }
