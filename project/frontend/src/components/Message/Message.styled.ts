@@ -19,6 +19,8 @@ export const MessageContainer = styled.div<MessageContainerProps>`
     background-color: ${({ theme, sentByUser }) =>
       sentByUser ? theme.colors.highlight : theme.colors.elementsBackground};
     border-radius: 18px;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
   time {
