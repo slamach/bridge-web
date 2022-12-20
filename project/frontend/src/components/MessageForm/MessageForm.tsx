@@ -41,8 +41,10 @@ const MessageForm = (props: MessageFormProps) => {
   const handleSubmit = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
 
-    if (value.length > 0 && !finallyDisabled) {
-      submit(value);
+    const valueTrimmed = value.trim();
+
+    if (valueTrimmed.length > 0 && !finallyDisabled) {
+      submit(valueTrimmed);
     }
   };
 
