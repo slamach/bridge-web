@@ -1,3 +1,4 @@
+import { SnackbarProvider } from 'notistack';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar';
@@ -21,12 +22,14 @@ const Home = () => {
   }, []);
 
   return (
-    <HomeContainer>
-      <Sidebar />
-      <HomeOutletContainer>
-        <Outlet />
-      </HomeOutletContainer>
-    </HomeContainer>
+    <SnackbarProvider maxSnack={1} autoHideDuration={3000}>
+      <HomeContainer>
+        <Sidebar />
+        <HomeOutletContainer>
+          <Outlet />
+        </HomeOutletContainer>
+      </HomeContainer>
+    </SnackbarProvider>
   );
 };
 
