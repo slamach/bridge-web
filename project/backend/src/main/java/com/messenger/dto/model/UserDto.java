@@ -13,4 +13,5 @@ public class UserDto {
     private String description;
     private LocalDateTime registrationDate;
     private byte[] image;
+    private String publicKey;
 }

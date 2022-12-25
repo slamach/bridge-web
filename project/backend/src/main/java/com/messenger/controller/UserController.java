@@ -53,6 +53,12 @@ public class UserController {
         return new Response<>(userService.updateDescription(newDescription));
     }
 
+    @PutMapping("/key")
+    @Operation(summary = "update user's public key")
+    public Response<UserDto> updatePublicKey(@RequestBody String newPublicKey) {
+        return new Response<>(userService.updatePublicKey(newPublicKey));
+    }
+
     @PutMapping("/image")
     @Operation(summary = "update user's image")
     public Response<UserDto> updateImage(@RequestParam("image") MultipartFile newImage) {

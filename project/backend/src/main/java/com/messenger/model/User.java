@@ -21,4 +21,5 @@ public class User {
     private String description;
     private LocalDateTime registrationDate = LocalDateTime.now();
     private Long imageId;
+    private String publicKey;
 }
