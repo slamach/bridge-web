@@ -71,13 +71,19 @@ const Sidebar = () => {
         isLoading={getChatsIsLoading}
         chats={
           getChatsData
-            ? getChatsData.payload.map((chat) => ({
-                chatId: chat.id,
-                name: chat.participantDtoList[0].name,
-                lastMessage: chat.lastMessage?.text,
-                sentByUser: chat.lastMessage?.sentByUser,
-                time: chat.lastMessage?.date,
-              }))
+            ? getChatsData.payload.flatMap((chat) =>
+                !chat.secret
+                  ? [
+                      {
+                        chatId: chat.id,
+                        name: chat.participantDtoList[0].name,
+                        lastMessage: chat.lastMessage?.text,
+                        sentByUser: chat.lastMessage?.sentByUser,
+                        time: chat.lastMessage?.date,
+                      },
+                    ]
+                  : []
+              )
             : []
         }
       />

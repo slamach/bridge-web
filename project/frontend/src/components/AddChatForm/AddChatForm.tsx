@@ -5,6 +5,7 @@ import { useCreateChatMutation } from '../../state/api/chatsAPI';
 import { useGetUserByUsernameMutation } from '../../state/api/userAPI';
 import { isErrorResponse } from '../../utils/errorHandling';
 import Button from '../Button/Button';
+import { Checkbox } from '../Checkbox/Checkbox';
 import { AddChatInput, StyledAddChatForm } from './AddChatForm.styled';
 
 export const AddChatForm = () => {
@@ -12,6 +13,7 @@ export const AddChatForm = () => {
   const [getUserByUsername] = useGetUserByUsernameMutation();
   const [createChat] = useCreateChatMutation();
   const [value, setValue] = useState<string>('');
+  const [isHidden, setIsHidden] = useState<boolean>(false);
   const { enqueueSnackbar } = useSnackbar();
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,12 +43,14 @@ export const AddChatForm = () => {
           return;
         }
 
-        await createChat({
+        const chat = await createChat({
           participants: [auth.user!.id, participant.id],
+          secret: isHidden,
         }).unwrap();
 
         setValue('');
-        enqueueSnackbar('Chat was successfully created', {
+        setIsHidden(false);
+        enqueueSnackbar(`Chat was created with id ${chat.payload.id}`, {
           variant: 'success',
         });
       }
@@ -69,6 +73,12 @@ export const AddChatForm = () => {
       <Button size="s" highlight type="submit">
         Add
       </Button>
+      <Checkbox
+        checked={isHidden}
+        onChange={(e) => setIsHidden(e.target.checked)}
+        label="Hide"
+        orientation="vertical"
+      />
     </StyledAddChatForm>
   );
 };
