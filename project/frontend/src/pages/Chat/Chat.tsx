@@ -68,7 +68,7 @@ const Chat = () => {
     return chat.participantDtoList[0].username;
   }, [chat]);
 
-  if (!chat) {
+  if (!chat && !getChatsIsLoading) {
     return <Navigate replace to="/" />;
   }
 

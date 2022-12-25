@@ -38,10 +38,12 @@ export interface Chat {
   id: number;
   participantDtoList: User[];
   lastMessage: Message;
+  secret: boolean;
 }
 
 export interface ChatCreationDTO {
   participants: number[];
+  secret?: boolean;
 }
 
 export interface SendMessageDTO {

@@ -21,9 +21,9 @@ export const StyledAddChatForm = styled.form`
   display: flex;
   align-items: center;
   padding: 0 17px;
+  gap: 10px;
 
   ${AddChatInput} {
     flex-grow: 1;
-    margin-right: 10px;
   }
 `;
