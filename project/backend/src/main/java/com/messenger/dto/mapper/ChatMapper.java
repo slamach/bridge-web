@@ -35,6 +35,7 @@ public class ChatMapper {
         chatDto.setLastMessage(getLastMessage(chat));
         List<UserDto> userDtoList = determineOtherUsers(chat);
         chatDto.setParticipantDtoList(userDtoList);
+        chatDto.setSecret(chat.isSecret());
 
         return chatDto;
     }
@@ -70,6 +71,7 @@ public class ChatMapper {
             users.add(userService.findById(userId));
         }
         chat.setParticipants(users);
+        chat.setSecret(chatDto.isSecret());
 
         return chat;
     }

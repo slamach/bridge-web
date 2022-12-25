@@ -71,6 +71,14 @@ public class UserService {
         return userMapper.createFrom(save(user));
     }
 
+    public UserDto updatePublicKey(String newPublicKey) {
+        User user = findById(authenticationFacade.getUserId());
+
+        user.setPublicKey(newPublicKey);
+
+        return userMapper.createFrom(save(user));
+    }
+
     public UserDto updateImage(MultipartFile newImage) {
         User user = findById(authenticationFacade.getUserId());
 
