@@ -9,6 +9,7 @@ import java.util.List;
 public class ChatDto {
 
     private Long id;
+    private boolean isSecret;
     @NotNull
     private List<Long> participants;
     private List<UserDto> participantDtoList;

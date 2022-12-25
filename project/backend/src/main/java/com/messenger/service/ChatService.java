@@ -86,10 +86,11 @@ public class ChatService {
     private void checkForDuplicate(Chat chat) {
         List<Chat> chats = getChatList();
         for (Chat dbChat : chats) {
-            if (Objects.equals(dbChat.getFirstUser(), chat.getFirstUser()) &&
+            if ((Objects.equals(dbChat.getFirstUser(), chat.getFirstUser()) &&
                     Objects.equals(dbChat.getSecondUser(), chat.getSecondUser()) ||
                     Objects.equals(dbChat.getFirstUser(), chat.getSecondUser()) &&
-                            Objects.equals(dbChat.getSecondUser(), chat.getFirstUser())) {
+                            Objects.equals(dbChat.getSecondUser(), chat.getFirstUser())) &&
+                    Objects.equals(dbChat.isSecret(), chat.isSecret())) {
                 throw new EntityAlreadyExistsException("This chat is already exists");
             }
         }

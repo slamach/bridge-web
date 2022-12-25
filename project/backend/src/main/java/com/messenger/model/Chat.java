@@ -13,6 +13,7 @@ public class Chat {
     @GeneratedValue(generator = "messenger_sequence", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "messenger_sequence", sequenceName = "messenger_sequence", allocationSize = 1)
     private Long id;
+    private boolean isSecret;
     @OneToMany(targetEntity = User.class, fetch = FetchType.EAGER)
     private List<User> participants;
 
