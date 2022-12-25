@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import Avatar from '../../components/Avatar/Avatar';
 import MessageForm from '../../components/MessageForm/MessageForm';
 import MessageList from '../../components/MessageList/MessageList';
@@ -67,6 +67,10 @@ const Chat = () => {
     }
     return chat.participantDtoList[0].username;
   }, [chat]);
+
+  if (!chat) {
+    return <Navigate replace to="/" />;
+  }
 
   return (
     <ChatContainer>
